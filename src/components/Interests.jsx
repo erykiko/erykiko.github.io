@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { interests, tools } from '../data/portfolio.js'
 
 const SECTION_TABS = [
-  { id: 'about', label: 'About me' },
-  { id: 'tools', label: 'Tools' },
+  { id: 'about', label: 'Who am I?' },
   { id: 'interests', label: 'Interests' },
 ]
 
@@ -18,7 +17,7 @@ export default function AboutMe() {
         <span className="section-label">Personal / Interests</span>
       </div>
 
-      <div className="work-tabs" role="tablist" aria-label="About me categories">
+      <div className="work-tabs" role="tablist" aria-label="About categories">
         {SECTION_TABS.map((tab) => (
           <button
             key={tab.id}
@@ -34,26 +33,48 @@ export default function AboutMe() {
 
       <div className="about-me-panel" role="tabpanel">
         {activeTab === 'about' && (
-          <div className="about-me-copy">
-            <p>
-              I am an early-career software developer from Rzeszów, currently studying Computer Science. I enjoy building things that are useful and easy to use, whether that is a web interface, a machine learning experiment, or a small game tool.
-            </p>
-            <p>
-              Outside of coding I climb, play and run tabletop RPG sessions, and follow game design and AI. I am always looking for ways to combine these interests with code.
-            </p>
-          </div>
-        )}
-
-        {activeTab === 'tools' && (
-          <div className="tools-list">
-            {tools.map((group) => (
-              <div className="tools-group" key={group.category}>
-                <span className="section-label">{group.category}</span>
-                <ul>
-                  {group.items.map((item) => <li key={item}>{item}</li>)}
-                </ul>
+          <div className="about-me-grid">
+            <div className="about-me-copy">
+              <p>
+                I am an early-career software developer from Rzeszów, currently studying Computer Science. I enjoy building things, whether that is a web interface, a machine learning experiment, or a small game.
+              </p>
+              <p>
+                Outside of coding I climb, play video games and run tabletop RPG sessions. I follow game design and AI and always look for ways to combine these interests with code.
+              </p>
+            </div>
+            <div className="fastfetch-shell">
+              <div className="fastfetch-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span className="fastfetch-title">erykiko@portfolio</span>
               </div>
-            ))}
+              <div className="fastfetch-body">
+                <div className="fastfetch-prompt">
+                  <span className="fastfetch-user">erykiko@portfolio</span>
+                  <span className="fastfetch-separator">:~$</span>
+                  <span> mytools</span>
+                </div>
+                <dl className="fastfetch-info">
+                  {tools.map((group) => (
+                    <div className="fastfetch-row" key={group.category}>
+                      <dt className="fastfetch-key">{group.category}</dt>
+                      <dd className="fastfetch-value">{group.items.join(', ')}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="fastfetch-colors" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -73,9 +94,7 @@ export default function AboutMe() {
               ))}
             </div>
             <div className="interest-panel" role="tabpanel">
-              <span className="section-label">{interests[activeInterest].label}</span>
-              <h3>{interests[activeInterest].title}</h3>
-              <p>{interests[activeInterest].description}</p>
+              <p className="interest-description">{interests[activeInterest].description}</p>
             </div>
           </div>
         )}

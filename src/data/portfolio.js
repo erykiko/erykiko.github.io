@@ -8,7 +8,9 @@ export const projects = [
     details: 'The project treats route generation as a sequence-to-sequence problem. A model takes a board ID and difficulty as input, then generates a tokenized sequence of hold placements and role markers. The intended direction is an encoder-decoder transformer trained on the Kilter Board Dataset.',
     stack: ['Python', 'PyTorch', 'Deep Learning'],
     status: 'Paused for now / future development',
-    gallery: [],
+    gallery: [
+      {src: '/kilter.png'}
+    ],
     enabled: true,
   },
   {
@@ -47,18 +49,15 @@ export const facts = [
 export const interests = [
   {
     label: '01 / Games',
-    title: 'Clear interfaces.',
-    description: 'TODO expand that section',
+    description: 'Souls-like games taught me to stay calm under pressure, learn from repeated failure, and approach hard challenges as puzzles that just need the right timing and pattern.',
   },
   {
     label: '02 / Climbing',
-    title: 'Problems to solve.',
-    description: 'Climbing gives me a reason to think creatively, stay patient, and look for a different approach when the first one fails.',
+    description: 'Climbing trains me to break hard problems into small moves, stay calm under pressure, and try a completely different angle when the obvious path does not work.',
   },
   {
-    label: '03 / TTRPG\'s',
-    title: 'Useful small systems.',
-    description: 'TODO expand this section',
+    label: '03 / TTRPGs',
+    description: 'Running tabletop RPGs taught me how to improvise, keep a group aligned, and write rules that stay fun even when the plan falls apart.',
   },
 ]
 
@@ -67,13 +66,13 @@ export const experience = [
     role: 'Unity Developer Intern',
     company: 'CI Global',
     dates: 'Summer 2026',
-    description: 'Automated deployment and updates of company Unity apps, created a tool to speed up work on prefabs, refactored old project, based on simillar one.',
+    description: 'Automated deployment and updates of company Unity apps, created a tool to speed up prefab work, and refactored an old project based on a similar one.',
   },
   {
     role: 'Level Design Intern',
     company: 'Simplicity Games',
     dates: 'Nov - Dec 2022',
-    description: 'Greyboxed and play-tested levels for a "Archery Red" - Unity VR game.',
+    description: 'Greyboxed and play-tested levels for "Archery Red", a Unity VR game.',
   },
 ]
 
@@ -82,7 +81,7 @@ export const activities = [
     role: 'SKNI KOD Member',
     company: 'Politechnika Rzeszowska',
     dates: '2023 — Present',
-    description: 'Participating in student-led group projects, organisation of educational events.(chyba niegramatyczne)',
+    description: 'Participating in student-led group projects and organizing educational events.',
   },
 ]
 
@@ -95,11 +94,11 @@ export const education = {
 export const tools = [
   {
     category: 'OS',
-    items: ['Windows 11', 'Ubuntu'],
+    items: ['CachyOS'],
   },
   {
     category: 'Editor',
-    items: ['VS Code', 'Neovim'],
+    items: ['VS Code', 'Rider'],
   },
   {
     category: 'Game engine',
@@ -107,6 +106,10 @@ export const tools = [
   },
   {
     category: 'Languages',
-    items: ['Python', 'C#', 'C++', 'JavaScript'],
+    items: ['Python', 'C#', 'C++'],
+  },
+  {
+    category: 'AI agents',
+    items: ['Claude Code', 'Opencode'],
   },
 ]

@@ -41,11 +41,12 @@ export default function HomePage() {
           <p className="eyebrow">Eryk Kopciuch</p>
           <h1>Software Developer</h1>
           <p className="hero-lede">
-            Computer Science student focused on Unity, game tooling, and machine learning. Internship experience in Unity and VR development, always building side projects to learn. Looking for my first full-time role.
+            Computer Science student focused on Unity, game tooling, and machine learning. I have internship experience in Unity and VR development, and I keep building side projects to learn. Looking for my first full-time role.
           </p>
           <div className="hero-actions">
             <a className="button" href="#work">View work</a>
             <a className="button button-ghost" href="#contact">Get in touch</a>
+            <a className="button" href="/resume.pdf" download>Download resume</a>
           </div>
           <div className="hero-meta">
             {facts.map(([label, value]) => (
