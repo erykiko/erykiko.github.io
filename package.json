@@ -9,10 +9,12 @@
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "cp dist/index.html dist/404.html",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
+    "onnxruntime-web": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",

@@ -1,60 +1,148 @@
-import { Link } from 'react-router-dom'
-import { education, experience, facts } from '../data/portfolio.js'
-import Interests from '../components/Interests.jsx'
-import Projects from '../components/Projects.jsx'
+import { useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { activities, education, experience, facts, projects } from '../data/portfolio.js'
+import AboutMe from '../components/Interests.jsx'
+
+const DEFAULT_TAB = 'experience'
+const TABS = [
+  { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'activities', label: 'Activities' },
+]
+
+const visibleProjects = projects.filter((project) => project.enabled !== false)
 
 export default function HomePage() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const initialTab = TABS.some((tab) => tab.id === searchParams.get('tab'))
+    ? searchParams.get('tab')
+    : DEFAULT_TAB
+  const [activeTab, setActiveTab] = useState(initialTab)
+
+  function selectTab(tabId) {
+    setActiveTab(tabId)
+    setSearchParams({ tab: tabId }, { replace: true })
+  }
+
   return (
     <main id="top" className="site-shell">
       <section className="hero">
-        <div>
-          <p className="eyebrow">Student, aspiring to be a software developer</p>
-          <h1>Ideas into<br />useful things.</h1>
+        <div className="hero-photo-wrap">
+          <img
+            className="hero-photo"
+            src="/photo.jpg"
+            alt="Eryk Kopciuch"
+            onError={(event) => { event.currentTarget.style.display = 'none' }}
+          />
+          <div className="hero-photo-placeholder" aria-hidden="true">Photo</div>
         </div>
-        <div className="hero-copy">
-          <p className="eyebrow">Open to opportunities / 2025</p>
-          <p>I am an early-career developer building thoughtful, accessible websites while growing my skills one project at a time.</p>
-        </div>
-      </section>
-
-      <Projects compact />
-
-      <section id="about" className="split">
-        <div><span className="section-label">(02) About</span></div>
-        <div>
-          <p className="about-text">I am a curious developer focused on learning in public, building useful interfaces, and turning feedback into better work.</p>
-          <div className="about-aside">
-            {facts.map(([label, value]) => <div className="fact" key={label}><span>{label}</span><strong>{value}</strong></div>)}
+        <div className="hero-main">
+          <p className="eyebrow">Eryk Kopciuch</p>
+          <h1>Software Developer</h1>
+          <p className="hero-lede">
+            Computer Science student focused on Unity, game tooling, and machine learning. Internship experience in Unity and VR development, always building side projects to learn. Looking for my first full-time role.
+          </p>
+          <div className="hero-actions">
+            <a className="button" href="#work">View work</a>
+            <a className="button button-ghost" href="#contact">Get in touch</a>
+          </div>
+          <div className="hero-meta">
+            {facts.map(([label, value]) => (
+              <div className="hero-fact" key={label}>
+                <span className="eyebrow">{label}</span>
+                <strong>{value}</strong>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="experience" className="experience-section">
-        <div className="section-head"><h2>Experience</h2><span className="section-label">(03)</span></div>
-        <div className="experience-list">
-          {experience.map((entry) => (
-            <article className="experience-entry" key={`${entry.company}-${entry.dates}`}>
-              <div>
-                <p className="eyebrow">{entry.dates}</p>
-                <h3>{entry.role}</h3>
-              </div>
-              <div>
-                <p className="experience-company">{entry.company}</p>
-                <p className="experience-description">{entry.description}</p>
-              </div>
-            </article>
+      <section id="work" className="work-section" aria-labelledby="work-title">
+        <div className="section-head">
+          <h2 id="work-title">Work</h2>
+          <span className="section-label">Experience / Education / Activities / Projects</span>
+        </div>
+
+        <div className="work-tabs" role="tablist" aria-label="Work categories">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              className={activeTab === tab.id ? 'work-tab active' : 'work-tab'}
+              onClick={() => selectTab(tab.id)}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+            >
+              {tab.label}
+            </button>
           ))}
         </div>
-        <div className="education-row">
-          <span className="section-label">Current major</span>
-          <div>
-            <h3>{education.major}</h3>
-            <p className="experience-company">{education.school} / {education.status}</p>
-          </div>
+
+        <div className="work-panel" role="tabpanel">
+          {activeTab === 'experience' && (
+            <div className="experience-list">
+              {experience.map((entry) => (
+                <article className="experience-entry" key={`${entry.company}-${entry.dates}`}>
+                  <div>
+                    <p className="eyebrow">{entry.dates}</p>
+                    <h3>{entry.role}</h3>
+                  </div>
+                  <div>
+                    <p className="experience-company">{entry.company}</p>
+                    <p className="experience-description">{entry.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'education' && (
+            <article className="education-entry">
+              <div>
+                <p className="eyebrow">{education.status}</p>
+                <h3>{education.major}</h3>
+              </div>
+              <div>
+                <p className="experience-company">{education.school}</p>
+                <p className="experience-description">Undergraduate studies in Computer Science.</p>
+              </div>
+            </article>
+          )}
+
+          {activeTab === 'activities' && (
+            <div className="experience-list">
+              {activities.map((entry) => (
+                <article className="experience-entry" key={`${entry.company}-${entry.dates}`}>
+                  <div>
+                    <p className="eyebrow">{entry.dates}</p>
+                    <h3>{entry.role}</h3>
+                  </div>
+                  <div>
+                    <p className="experience-company">{entry.company}</p>
+                    <p className="experience-description">{entry.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'projects' && (
+            <div className="project-list">
+              {visibleProjects.map((project) => (
+                <Link className="project-row" to={`/projects/${project.slug}?tab=projects`} key={project.slug}>
+                  <div>
+                    <h3>{project.title}</h3>
+                    <span className="meta">{project.meta}</span>
+                  </div>
+                  <p className="project-row-description">{project.description}</p>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      <Interests />
+      <AboutMe />
 
       <section id="contact" className="contact">
         <h2>Let&apos;s build<br />something.</h2>
